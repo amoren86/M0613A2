@@ -2,8 +2,8 @@ package cat.institutmarianao.medicine.stock.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import cat.institutmarianao.medicine.stock.model.Medicine;
@@ -34,8 +34,10 @@ public class RepositoryExampleController {
 	}
 
 	// Handles GET requests to display details for a specific medicine by ID
-	@GetMapping("/medicine/{id}")
-	public ModelAndView showMedicineDetail(@PathVariable("id") String id) {
+	@GetMapping("/medicine")
+	// Do not need to use @RequestParam("id") because the parameter name matches the
+	// request parameter name
+	public ModelAndView showMedicineDetail(@RequestParam String id) {
 		ModelAndView modelView = new ModelAndView("medicine");
 		Medicine medicine = medicineRepository.findById(id);
 		modelView.addObject("medicine", medicine);

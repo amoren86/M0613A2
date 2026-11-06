@@ -50,7 +50,7 @@
 							<td class="text-end" th:text="${med.stockQuantity}">150</td>
 							<td class="text-end fw-semibold" th:text="${med.price + '€'}">3.50€</td>
 							<td class="text-center">
-								<a th:href="@{/repository-example/medicine/{id}(id=${med.id})}" class="btn btn-sm btn-outline-dark">View Details</a>
+								<a th:href="@{/repository-example/medicine(id=${med.id})}" class="btn btn-sm btn-outline-dark">View Details</a>
 							</td>
 						</tr>
 						<!-- Empty state row if no elements -->
