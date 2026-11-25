@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ca">
+<head th:replace="~{fragments/template :: head}">
+	<!-- Static Preview fallback -->
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link rel="stylesheet"
+		href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+	<title>Add Medicine</title>
+</head>
+<body class="m-4 bg-light text-dark">
+	<div class="container">
+		<!-- Header fragment -->
+		<header th:replace="~{fragments/template :: header}"
+			class="mb-4 p-4 bg-white border border-secondary-subtle rounded shadow-sm">
+			<p class="display-4 fw-bold mb-1 text-dark">
+				Medicine Stock
+			</p>
+			<p class="h5 text-secondary mb-0 fw-normal">
+				By Institut Marianao
+			</p>
+		</header>
+
+		<!-- Main Content Card -->
+		<div class="card border border-secondary-subtle shadow-sm p-4 bg-white rounded">
+			<div class="d-flex justify-content-between align-items-center mb-4">
+				<h2 class="h3 fw-bold text-dark mb-0">Add New Medicine</h2>
+				<a th:href="@{/medicines/all}" class="btn btn-outline-secondary btn-sm">Medicine Catalog</a>
+			</div>
+
+			<!-- Thymeleaf Form bound to the 'newMedicine' form-backing bean -->
+			<form th:action="@{/medicines/add}" th:object="${newMedicine}" method="post">
+				<div class="row g-3">
+					<div class="col-md-4">
+						<label for="id" class="form-label fw-semibold">Code</label>
+						<input type="text" id="id" th:field="*{id}" class="form-control"
+							th:classappend="${#fields.hasErrors('id')} ? 'is-invalid'"
+							placeholder="e.g. MED-004" />
+						<div class="invalid-feedback" th:if="${#fields.hasErrors('id')}" th:errors="*{id}">
+							Code error
+						</div>
+					</div>
+
+					<div class="col-md-5">
+						<label for="name" class="form-label fw-semibold">Name</label>
+						<input type="text" id="name" th:field="*{name}" class="form-control"
+							th:classappend="${#fields.hasErrors('name')} ? 'is-invalid'"
+							placeholder="e.g. Omeprazole 20mg" />
+						<div class="invalid-feedback" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">
+							Name error
+						</div>
+					</div>
+
+					<div class="col-md-3">
+						<label for="price" class="form-label fw-semibold">Price (€)</label>
+						<input type="number" step="0.01" id="price" th:field="*{price}" class="form-control"
+							th:classappend="${#fields.hasErrors('price')} ? 'is-invalid'" />
+						<div class="invalid-feedback" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">
+							Price error
+						</div>
+					</div>
+
+					<div class="col-md-6">
+						<label for="producer" class="form-label fw-semibold">Producer / Lab</label>
+						<input type="text" id="producer" th:field="*{producer}" class="form-control"
+							th:classappend="${#fields.hasErrors('producer')} ? 'is-invalid'"
+							placeholder="e.g. Cinfa" />
+						<div class="invalid-feedback" th:if="${#fields.hasErrors('producer')}" th:errors="*{producer}">
+							Producer error
+						</div>
+					</div>
+
+					<div class="col-md-6">
+						<label for="category" class="form-label fw-semibold">Category</label>
+						<input type="text" id="category" th:field="*{category}" class="form-control"
+							th:classappend="${#fields.hasErrors('category')} ? 'is-invalid'"
+							placeholder="e.g. Antacid" />
+						<div class="invalid-feedback" th:if="${#fields.hasErrors('category')}" th:errors="*{category}">
+							Category error
+						</div>
+					</div>
+
+					<div class="col-md-6">
+						<label for="stockQuantity" class="form-label fw-semibold">Stock Quantity</label>
+						<input type="number" id="stockQuantity" th:field="*{stockQuantity}" class="form-control"
+							th:classappend="${#fields.hasErrors('stockQuantity')} ? 'is-invalid'" />
+						<div class="invalid-feedback" th:if="${#fields.hasErrors('stockQuantity')}" th:errors="*{stockQuantity}">
+							Stock error
+						</div>
+					</div>
+
+					<div class="col-md-6">
+						<label class="form-label fw-semibold d-block">Active</label>
+						<div class="form-check form-check-inline mt-2">
+							<input class="form-check-input" type="radio" id="activeYes" th:field="*{active}" value="true" />
+							<label class="form-check-label" for="activeYes">Yes</label>
+						</div>
+						<div class="form-check form-check-inline mt-2">
+							<input class="form-check-input" type="radio" id="activeNo" th:field="*{active}" value="false" />
+							<label class="form-check-label" for="activeNo">No</label>
+						</div>
+					</div>
+
+					<div class="col-12">
+						<label for="description" class="form-label fw-semibold">Description</label>
+						<textarea id="description" th:field="*{description}" rows="2" class="form-control"
+							th:classappend="${#fields.hasErrors('description')} ? 'is-invalid'"></textarea>
+						<div class="invalid-feedback" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">
+							Description error
+						</div>
+					</div>
+
+					<div class="col-12 mt-4 d-flex gap-2">
+						<button type="submit" class="btn btn-dark px-4">Create Medicine</button>
+						<a th:href="@{/medicines/all}" class="btn btn-outline-secondary px-4">Cancel</a>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

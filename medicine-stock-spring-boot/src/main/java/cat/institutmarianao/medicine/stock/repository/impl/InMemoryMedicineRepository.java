@@ -1,9 +1,9 @@
 package cat.institutmarianao.medicine.stock.repository.impl;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import org.springframework.stereotype.Repository;
 
@@ -15,7 +15,7 @@ import cat.institutmarianao.medicine.stock.repository.MedicineRepository;
 public class InMemoryMedicineRepository implements MedicineRepository {
 
 	// In-memory data store using a HashMap
-	private final Map<String, Medicine> medicines = new HashMap<>();
+	private final Map<String, Medicine> medicines = new TreeMap<>();
 
 	public InMemoryMedicineRepository() {
 		initSampleData();
@@ -59,6 +59,19 @@ public class InMemoryMedicineRepository implements MedicineRepository {
 	@Override
 	public Medicine findById(String id) {
 		return medicines.get(id);
+	}
+
+	@Override
+	public List<Medicine> findByCategory(String category) {
+		List<Medicine> medicinesByCategory = new ArrayList<>();
+		if (category != null) {
+			for (Medicine medicine : medicines.values()) {
+				if (category.equalsIgnoreCase(medicine.getCategory())) {
+					medicinesByCategory.add(medicine);
+				}
+			}
+		}
+		return medicinesByCategory;
 	}
 
 	@Override

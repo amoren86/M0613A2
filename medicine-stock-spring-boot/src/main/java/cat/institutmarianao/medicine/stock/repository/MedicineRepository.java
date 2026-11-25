@@ -11,6 +11,8 @@ public interface MedicineRepository {
 
 	Medicine findById(String id);
 
+	List<Medicine> findByCategory(String category);
+
 	void save(Medicine medicine);
 
 	void deleteById(String id);

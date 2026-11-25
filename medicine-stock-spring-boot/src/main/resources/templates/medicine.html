@@ -39,7 +39,7 @@
 					<dd class="col-sm-9 text-secondary" th:text="${medicine.stockQuantity}">150</dd>
 					
 					<dt class="col-sm-3 fw-bold text-dark">Price:</dt>
-					<dd class="col-sm-9 text-secondary" th:text="${medicine.price + '€'}">3.50€</dd>
+					<dd class="col-sm-9 text-secondary" th:text="${#numbers.formatDecimal(medicine.price, 1, 2) + ' €'}">3.50€</dd>
 				</dl>
 				
 				<div class="col-12">
